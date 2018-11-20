@@ -107,3 +107,14 @@
   	background-color: GhostWhite;
 	border: 3px solid grey;
 }
+.Type {
+    font-family: "fantasy", Impact, serif;
+    margin-top: 2em;
+    color: black;
+    font-size: 75%;
+}
+form {
+	border: 30px solid GhostWhite;
+	background-color: GhostWhite;
+	color: GhostWhite;
+}
