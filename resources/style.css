@@ -85,3 +85,7 @@
 	float:right;
 	margin-right: 310px;
 }
+.center_div{
+	margin: 0 auto;
+	width:60%;
+}
