@@ -13,26 +13,8 @@
   
   </head>
   <body>
-     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.html">
-        <img src = "resources/images/logo.png" id = "logo"/>
-      </a>
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <?php include 'nav.php'; ?>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          
-        </ul>
-        
-        
-      </div>
-    </nav>
     <div class = "contents">
       <p id = "opener"><strong>Going home for the holiday and need a ride back?</strong></p>
 
@@ -54,7 +36,7 @@
     </div>
    <h1 id="title"><strong>Join rEDUce!</strong></h1>
    
-    <button id = "create"class="btn btn-outline-success my-2 my-sm-0" type="submit">Create an account</button>
+    <button id = "create"class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="register.php">Create an account</a></button>
    
    
    

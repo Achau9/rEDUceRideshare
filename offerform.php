@@ -1,4 +1,42 @@
+<?php
+  session_start(); 
 
+  if (!isset($_SESSION['username'])) {
+  	// $_SESSION['msg'] = "You must log in first";
+  	header('location: splashpage.php');
+	}
+	
+	$server = 'localhost';
+	$user = 'root';
+	$pass = '';
+	$dbname = 'rideshare';
+	if(isset($_POST['go'])){
+		try {
+			//create database
+			$city=$_POST['city'];
+			$state=$_POST['state'];
+			$date=$_POST['date'];
+			$dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
+			$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$ins=$dbconn->prepare(
+				'INSERT INTO `drivers` (id,username,state,city,date)
+				VALUES (:id,:username,:city,:state,:date)'
+			);
+			$username="bob";
+			$dt=new DateTime($date);
+			$date=$dt->format('Y-m-d');
+			$ins->bindParam(':id',$id);
+			$ins->bindParam(':username',$username);
+			$ins->bindParam(':city',$city);
+			$ins->bindParam(':state',$state);
+			$ins->bindParam(':date',$date);
+			$ins->execute();
+		}
+		catch(PDOException $e){
+			echo "<br>" . $e->getMessage();
+		}
+	}
+?>
 
 <!doctype html>
 <html lang="en">
@@ -12,32 +50,13 @@
 	<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link href="resources/style.css" rel="stylesheet" type="text/css">
-    <title>Ride Form</title>
+    <title>Offer Form</title>
   </head>
   <body>
-     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.html">
-        <img src = "resources/images/logo.png" id = "logo"/>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          
-        </ul>
-        
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="login.html">Login</a></button>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="splashpage.html">Signup</a></button>
-      </div>
-    </nav>
+   <?php include 'nav.php'; ?>
   
-	<h1 id="title"><strong>rEDUce!<div class="Type"><u>RIDERS</u></div></h1>
-	<form class="center_div" action="insert.php" method="post">
+	<h1 id="title"><strong>rEDUce!<div class="Type"><u>DRIVERS</u></div></h1>
+	<form class="center_div" action="offerform.php" method="post">
    
 
 		<div class="row">
@@ -66,7 +85,7 @@
 		  </div>
 		 </div>
 		</div>
-		 <button class="btn btn-outline-success" type="submit">GO</button>
+		 <button class="btn btn-outline-success" type="submit"name="go">GO</button>
   </form>
   
  

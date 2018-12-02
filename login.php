@@ -1,3 +1,4 @@
+<?php include('server.php') ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,17 +8,15 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <link href="resources/style.css" rel="stylesheet" type="text/css">
-
-  
+	<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+	<link href="resources/style.css" rel="stylesheet" type="text/css">
+    <title>Ride Form</title>
   </head>
   <body>
-     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.html">
-        <img src = "resources/images/logo.png" id = "logo">
+     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" href="index.php">
+        <img src = "resources/images/logo.png" id = "logo"/>
       </a>
-      
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -25,37 +24,29 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          
+            <a class="nav-link" href="index.php" style="color:lightgreen; font-size:1.5em;"><strong>rEDUce</strong></a>
+          </li>  
         </ul>
-        
-        <button class="btn btn-outline-success" type="submit"><a href="login.html">Login</a></button>
-        <button class="btn btn-outline-success" type="submit"><a href="splashpage.html">Signup<a></button>
       </div>
     </nav>
-   
-   <h1 id="title"><strong>rEDUce</strong></h1>
-    <main role="riding" class="container">
-      <div class="jumbotron">
-        <h1>Riding</h1>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          <a href ="rideform.html">Find a ride</a></button>
-        
-      </div>
-    </main>
-    <main role="offering" class="container">
-      <div class="jumbotron">
-        <h1>Offering</h1>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          <a href ="offerform.html">Offer a ride<a>
-        </button>
-        
-      </div>
-    </main>
-    <div id = "create">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href ="history.html">Ride History</a></button>
+
+    <div class="panel">
+      <form method="post" action="login.php">
+        <?php include('errors.php'); ?>
+        <div class="form-group">
+          <label> Username </label>
+          <input type="text" name="username">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password">
+        </div>
+        <button type="submit" class="btn" name="login_user">Login</button>
+        <p> Not a member? <a href="register.php">Sign Up!</a></p>
+      </form>
     </div>
+  
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

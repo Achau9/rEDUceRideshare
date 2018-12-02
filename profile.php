@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link href="resources/style.css" rel="stylesheet" type="text/css">
-    <title>Ride Form</title>
+    <title>Profile</title>
   </head>
   <body>
      <nav class="navbar navbar-expand-md navbar-dark bg-dark">

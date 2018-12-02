@@ -1,4 +1,12 @@
 <?php
+
+	session_start();
+
+  if (!isset($_SESSION['username'])) {
+  	$_SESSION['msg'] = "You must log in first";
+  	header('location: login.php');
+  }
+
 	$server = 'localhost';
 	$user = 'root';
 	$pass = '';
@@ -12,13 +20,13 @@
 			$dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
 			$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$ins=$dbconn->prepare(
-				'INSERT INTO `riders` (id,username,state,city,date)
-				VALUES (:id,:username,:city,:state,:date)'
+				'INSERT INTO `riders` (rideid,username,state,city,date)
+				VALUES (:rideid,:username,:city,:state,:date)'
 			);
-			$username="bob";
+			$username=$_SESSION['username'];
 			$dt=new DateTime($date);
 			$date=$dt->format('Y-m-d');
-			$ins->bindParam(':id',$id);
+			$ins->bindParam(':rideid',$id);
 			$ins->bindParam(':username',$username);
 			$ins->bindParam(':city',$city);
 			$ins->bindParam(':state',$state);
@@ -46,26 +54,8 @@
     <title>Ride Form</title>
   </head>
   <body>
-     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.html">
-        <img src = "resources/images/logo.png" id = "logo"/>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          
-        </ul>
-        
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="login.html">Login</a></button>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="splashpage.html">Signup</a></button>
-      </div>
-    </nav>
+		<!-- includes navbar -->
+		<?php include 'nav.php'; ?>
   
 	<h1 id="title"><strong>rEDUce!<div class="Type"><u>RIDERS</u></div></h1>
 	<form class="center_div" action="rideform.php" method="post">

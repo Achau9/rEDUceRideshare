@@ -1,3 +1,16 @@
+<?php 
+  session_start(); 
+
+  if (!isset($_SESSION['username'])) {
+  	// $_SESSION['msg'] = "You must log in first";
+  	header('location: splashpage.php');
+  }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['username']);
+  	header("location: splashpage.php");
+  }
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,26 +29,7 @@
   
   </head>
   <body>
-     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.html">
-        <img src = "resources/images/logo.png" id = "logo">
-      </a>
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          
-        </ul>
-        <button class="btn btn-outline-success" type="submit">Login</button>
-        <button class="btn btn-outline-success" type="submit">Signup</button>
-      </div>
-    </nav>
+    <?php include 'nav.php'; ?>
 
     <img class="History" src="resources/History.jpg" alt="History"/>
     <div class="HistoryForm"><div class="HistoryOutput"></div></div>
