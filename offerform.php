@@ -1,3 +1,36 @@
+<?php
+	$server = 'localhost';
+	$user = 'root';
+	$pass = '';
+	$dbname = 'rideshare';
+	if(isset($_POST['go'])){
+		try {
+			//create database
+			$city=$_POST['city'];
+			$state=$_POST['state'];
+			$date=$_POST['date'];
+			$dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
+			$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$ins=$dbconn->prepare(
+				'INSERT INTO `drivers` (id,username,state,city,date)
+				VALUES (:id,:username,:city,:state,:date)'
+			);
+			$username="bob";
+			$dt=new DateTime($date);
+			$date=$dt->format('Y-m-d');
+			$ins->bindParam(':id',$id);
+			$ins->bindParam(':username',$username);
+			$ins->bindParam(':city',$city);
+			$ins->bindParam(':state',$state);
+			$ins->bindParam(':date',$date);
+			$ins->execute();
+		}
+		catch(PDOException $e){
+			echo "<br>" . $e->getMessage();
+		}
+	}
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,7 +43,7 @@
 	<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link href="resources/style.css" rel="stylesheet" type="text/css">
-    <title>Profile</title>
+    <title>Offer Form</title>
   </head>
   <body>
      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -34,36 +67,38 @@
       </div>
     </nav>
   
-	<h1 id="title"><strong>Welcome user<div class="Type"></h1>
-	<div class="center_div" action="rideform.php" method="post">
-		<div class="row">
-				<div class="col">
-				  <img src="https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg"></img>
-				</div>
-				<div class="col">
-				  <h2> John Smith </h2>
-				  <p> Troy, NY </p>
-				</div>
-		</div>
-		<div class="row">
-				<div class="col">
-				  <h3> Comments: </h3>
-				  <table>
-					<tr>
-						<th> jill says:</th>
-					</tr>
-					<tr>
-						<td style="text-indent: 20px;">good stuff</td>
-					</tr>
+	<h1 id="title"><strong>rEDUce!<div class="Type"><u>DRIVERS</u></div></h1>
+	<form class="center_div" action="offerform.php" method="post">
+   
 
-				  </table>
-				</div>
-				
+		<div class="row">
+			<div class="col">
+			  <input name="state" type="text" class="form-control" placeholder="State">
+			</div>
+			<div class="col">
+			  <input name="city" type="text" class="form-control" placeholder="City">
+			</div>
 		</div>
-		
-		
-		
-  </div>
+		<br>
+
+		<br>
+		<div class="form-group ">
+
+		  <div class="input-group">
+		   <div class="input-group-addon">
+		  <i class="fa fa-calendar">
+		  </i>
+		   </div>
+		   <input class="form-control" id="datepicker" name="date" placeholder="MM/DD/YYYY" type="text"/>
+		   <div class="input-group-addon">
+		  <i class="fa ">
+		  </i>
+		   </div>
+		  </div>
+		 </div>
+		</div>
+		 <button class="btn btn-outline-success" type="submit"name="go">GO</button>
+  </form>
   
  
     <!-- Optional JavaScript -->
