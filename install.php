@@ -27,6 +27,15 @@ try{
 				PRIMARY KEY (id)
 			);";
 			$dbconn->exec($sql);
+
+			$sql="CREATE TABLE IF NOT EXISTS `users` (
+				id int(11) NOT NULL AUTO_INCREMENT,
+  				username varchar(100) CHARACTER SET utf8 NOT NULL,
+ 				email varchar(100) CHARACTER SET utf8 NOT NULL,
+  				password varchar(100) CHARACTER SET utf8 NOT NULL,
+				PRIMARY KEY (id)
+				);";
+			$dbconn->exec($sql);
 }
 catch(PDOException $e){
 	echo $sql . "<br>" . $e->getMessage();
