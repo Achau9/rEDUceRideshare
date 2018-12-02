@@ -1,4 +1,11 @@
 <?php
+  session_start(); 
+
+  if (!isset($_SESSION['username'])) {
+  	// $_SESSION['msg'] = "You must log in first";
+  	header('location: splashpage.php');
+	}
+	
 	$server = 'localhost';
 	$user = 'root';
 	$pass = '';
@@ -46,26 +53,7 @@
     <title>Offer Form</title>
   </head>
   <body>
-     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.html">
-        <img src = "resources/images/logo.png" id = "logo"/>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          
-        </ul>
-        
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="login.html">Login</a></button>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="splashpage.html">Signup</a></button>
-      </div>
-    </nav>
+   <?php include 'nav.php'; ?>
   
 	<h1 id="title"><strong>rEDUce!<div class="Type"><u>DRIVERS</u></div></h1>
 	<form class="center_div" action="offerform.php" method="post">

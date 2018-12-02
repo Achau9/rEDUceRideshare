@@ -1,4 +1,5 @@
-<?php include('server.php') ?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,12 +10,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link href="resources/style.css" rel="stylesheet" type="text/css">
     <title>Ride Form</title>
   </head>
   <body>
      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.php">
+      <a class="navbar-brand" href="index.html">
         <img src = "resources/images/logo.png" id = "logo"/>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,33 +26,55 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="index.php" style="color:lightgreen; font-size:1.5em;"><strong>rEDUce</strong></a>
-          </li>  
+            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          
         </ul>
+        
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="login.html">Login</a></button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="splashpage.html">Signup</a></button>
       </div>
     </nav>
-
-    <div class="panel">
-      <form method="post" action="login.php">
-        <?php include('errors.php'); ?>
-        <div class="form-group">
-          <label> Username </label>
-          <input type="text" name="username">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" name="password">
-        </div>
-        <button type="submit" class="btn" name="login_user">Login</button>
-        <p> Not a member? <a href="register.php">Sign Up!</a></p>
-      </form>
-    </div>
   
+	<h1 id="title"><strong>rEDUce!<div class="Type"><u>RIDERS</u></div></h1>
+	<form class="center_div" action="insert.php" method="post">
+   
 
+		<div class="row">
+			<div class="col">
+			  <input name="state" type="text" class="form-control" placeholder="State">
+			</div>
+			<div class="col">
+			  <input name="city" type="text" class="form-control" placeholder="City">
+			</div>
+		</div>
+		<br>
+
+		<br>
+		<div class="form-group ">
+
+		  <div class="input-group">
+		   <div class="input-group-addon">
+		  <i class="fa fa-calendar">
+		  </i>
+		   </div>
+		   <input class="form-control" id="datepicker" name="date" placeholder="MM/DD/YYYY" type="text"/>
+		   <div class="input-group-addon">
+		  <i class="fa ">
+		  </i>
+		   </div>
+		  </div>
+		 </div>
+		</div>
+		 <button class="btn btn-outline-success" type="submit">GO</button>
+  </form>
+  
+ 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="resources/ridesform.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>
