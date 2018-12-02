@@ -1,3 +1,16 @@
+<?php 
+  session_start(); 
+
+  // if (!isset($_SESSION['username'])) {
+  // 	$_SESSION['msg'] = "You must log in first";
+  // 	header('location: login.php');
+  // }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['username']);
+  	header("location: index.php");
+  }
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -30,12 +43,31 @@
           
         </ul>
         
-        <button class="btn btn-outline-success" type="submit"><a href="login.html">Login</a></button>
-        <button class="btn btn-outline-success" type="submit"><a href="splashpage.html">Signup<a></button>
+        <button class="btn btn-outline-success" type="submit"><a href="login.php">Login</a></button>
+        <button class="btn btn-outline-success" type="submit"><a href="register.php">Signup<a></button>
       </div>
     </nav>
    
    <h1 id="title"><strong>rEDUce</strong></h1>
+   <div class="content">
+      <!-- notification message -->
+      <?php if (isset($_SESSION['success'])) : ?>
+        <div class="error success" >
+          <h3>
+            <?php 
+              echo $_SESSION['success']; 
+              unset($_SESSION['success']);
+            ?>
+          </h3>
+        </div>
+      <?php endif ?>
+  
+      <!-- logged in user information -->
+      <?php  if (isset($_SESSION['username'])) : ?>
+        <p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
+        <p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
+      <?php endif ?>
+  </div>
     <main role="riding" class="container">
       <div class="jumbotron">
         <h1>Riding</h1>

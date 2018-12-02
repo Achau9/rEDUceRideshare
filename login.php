@@ -1,3 +1,4 @@
+<?php include('server.php') ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,8 +33,24 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="splashpage.html">Signup<a></button>
       </div>
     </nav>
+
+    <div class="panel">
+      <form method="post" action="login.php">
+        <?php include('errors.php'); ?>
+        <div class="form-group">
+          <label> Username </label>
+          <input type="text" name="username">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password">
+        </div>
+        <button type="submit" class="btn" name="login_user">Login</button>
+        <p> Not a member? <a href="register.php">Sign Up!</a></p>
+      </form>
+    </div>
   
-	
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
