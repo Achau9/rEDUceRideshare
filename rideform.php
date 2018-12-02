@@ -1,4 +1,8 @@
 <?php
+
+	session_start();
+	echo $_SESSION['username'];
+
 	$server = 'localhost';
 	$user = 'root';
 	$pass = '';
@@ -12,13 +16,13 @@
 			$dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
 			$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$ins=$dbconn->prepare(
-				'INSERT INTO `riders` (id,username,state,city,date)
-				VALUES (:id,:username,:city,:state,:date)'
+				'INSERT INTO `riders` (rideid,username,state,city,date)
+				VALUES (:rideid,:username,:city,:state,:date)'
 			);
-			$username="bob";
+			$username=$_SESSION['username'];
 			$dt=new DateTime($date);
 			$date=$dt->format('Y-m-d');
-			$ins->bindParam(':id',$id);
+			$ins->bindParam(':rideid',$id);
 			$ins->bindParam(':username',$username);
 			$ins->bindParam(':city',$city);
 			$ins->bindParam(':state',$state);
