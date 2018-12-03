@@ -19,13 +19,13 @@
 			$dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
 			$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$ins=$dbconn->prepare(
-				'INSERT INTO `drivers` (driverid,username,state,city,date)
-				VALUES (:driverid,:username,:state,:city,:date)'
+				'INSERT INTO `drivers` (rideid,username,state,city,date)
+				VALUES (:rideid,:username,:state,:city,:date)'
 			);
 			$username=$_SESSION['username'];
 			$dt=new DateTime($date);
 			$date=$dt->format('Y-m-d');
-			$ins->bindParam(':driverid',$id);
+			$ins->bindParam(':rideid',$id);
 			$ins->bindParam(':username',$username);
 			$ins->bindParam(':state',$state);
 			$ins->bindParam(':city',$city);
