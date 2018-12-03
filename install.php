@@ -56,17 +56,17 @@ try{
 
 			$dbconn->exec($sql);
 	$sql="INSERT INTO `riders` VALUES
-	(NULL, 'bob', 'Troy', 'NY', '0000-00-00'),
-	(NULL, 'bob', 'Troy', 'NY', '0000-00-00'),
-	(NULL, 'bob', 'Troy', 'NY', '0000-00-00'),
-	(NULL, 'bob', 'Troy', 'NY', '0000-00-00'),
-	(NULL, 'bob', 'Troy', 'NY', '1998-02-01'),
-	(NULL, 'bob', 'Troy', 'NY', '1998-01-01'),
-	(NULL, 'bob', 'Troy', 'NY', '0000-00-00'),
-	(NULL, 'bob', 'Troy', 'NY', '2018-12-19'),
-	(NULL, 'bob', 'Jfsd', 'fa', '2018-12-07'),
-	(NULL, 'bob', 'hhsg', 'nu', '2018-12-06'),
-	(NULL, 'bob', 'hhsg', 'nu', '2018-12-06');";
+	(NULL, '_', 'Troy', 'NY', '2006-01-03'),
+	(NULL, '_', 'Troy', 'NY', '2006-03-02'),
+	(NULL, '_', 'Troy', 'NY', '2009-05-06'),
+	(NULL, '_', 'Troy', 'NY', '2009-01-19'),
+	(NULL, '_', 'Troy', 'NY', '2012-02-01'),
+	(NULL, '_', 'Troy', 'NY', '2013-03-02'),
+	(NULL, '_', 'Troy', 'NY', '2013-03-04'),
+	(NULL, '_', 'Tims', 'NJ', '2016-12-19'),
+	(NULL, '_', 'Tims', 'NJ', '2017-12-07'),
+	(NULL, '_', 'Tims', 'NJ', '2018-02-02'),
+	(NULL, '_', 'Tims', 'NJ', '2018-12-06');";
 			$dbconn->exec($sql);
 
 }
