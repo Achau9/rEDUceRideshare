@@ -19,7 +19,7 @@ try{
 
 	$dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
 	$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  
+
   // drop all tables
   $sql = "DROP TABLES IF EXISTS drivers, riders, users";
   $dbconn->exec($sql);
@@ -45,7 +45,7 @@ try{
 				city VARCHAR(100) CHARACTER SET utf8 NOT NULL,
 				date DATE NOT NULL,
 				PRIMARY KEY (rideid),
-				CONSTRAINT `fk_rid_username` 
+				CONSTRAINT `fk_rid_username`
 				FOREIGN KEY (username) REFERENCES users (username)
 			);";
 	$dbconn->exec($sql);
@@ -66,20 +66,20 @@ try{
 	$sql ="INSERT INTO `users` VALUES
 	(999999, '_', '_@_.com', 'passhash', 'Troy', 'NY');";
 	$dbconn->exec($sql);
-	
+
 	$sql="INSERT INTO `riders` VALUES
-	(NULL, '_', 'Troy', 'NY', '2006-01-03'),
-	(NULL, '_', 'Troy', 'NY', '2006-03-02'),
-	(NULL, '_', 'Troy', 'NY', '2009-05-06'),
-	(NULL, '_', 'Troy', 'NY', '2009-01-19'),
-	(NULL, '_', 'Troy', 'NY', '2012-02-01'),
-	(NULL, '_', 'Troy', 'NY', '2013-03-02'),
-	(NULL, '_', 'Troy', 'NY', '2013-03-04'),
-	(NULL, '_', 'Tims', 'NJ', '2016-12-19'),
-	(NULL, '_', 'Tims', 'NJ', '2017-12-07'),
-	(NULL, '_', 'Tims', 'NJ', '2018-02-02'),
-	(NULL, '_', 'Tims', 'NJ', '2018-12-06');";
-			
+	(NULL, '_', 'NY', 'Troy', '2006-01-03'),
+	(NULL, '_', 'NY', 'Troy', '2006-03-02'),
+	(NULL, '_', 'NY', 'Troy', '2009-05-06'),
+	(NULL, '_', 'NY', 'Troy', '2009-01-19'),
+	(NULL, '_', 'NY', 'Troy', '2012-02-01'),
+	(NULL, '_', 'NY', 'Troy', '2013-03-02'),
+	(NULL, '_', 'NY', 'Troy', '2013-03-04'),
+	(NULL, '_', 'NJ', 'Tims', '2016-12-19'),
+	(NULL, '_', 'NJ', 'Tims', '2017-12-07'),
+	(NULL, '_', 'NJ', 'Tims', '2018-02-02'),
+	(NULL, '_', 'NJ', 'Tims', '2018-12-06');";
+
 	$dbconn->exec($sql);
 
 }

@@ -6,39 +6,6 @@
   	$_SESSION['msg'] = "You must log in first";
   	header('location: login.php');
   }
-
-	$server = 'localhost';
-	$user = 'root';
-	$pass = '';
-	$dbname = 'rideshare';
-	if(isset($_POST['go'])){
-		try {
-			//create database
-			$city=$_POST['city'];
-			$state=$_POST['state'];
-			$date=$_POST['date'];
-			$dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
-			$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$ins=$dbconn->prepare(
-				'INSERT INTO `riders` (rideid,username,state,city,date)
-				VALUES (:rideid,:username,:city,:state,:date)'
-			);
-			$username=$_SESSION['username'];
-			$dt=new DateTime($date);
-			$date=$dt->format('Y-m-d');
-			$ins->bindParam(':rideid',$id);
-			$ins->bindParam(':username',$username);
-			$ins->bindParam(':city',$city);
-			$ins->bindParam(':state',$state);
-			$ins->bindParam(':date',$date);
-			$ins->execute();
-			echo "<script> location.href='rideresult.php'; </script>";
-		}
-		catch(PDOException $e){
-			
-			echo "<br>" . $e->getMessage();
-		}
-	}
 ?>
 
 <!doctype html>
@@ -60,7 +27,7 @@
 		<?php include 'nav.php'; ?>
   
 	<h1 id="title"><strong>rEDUce!<div class="Type"><u>RIDERS</u></div></h1>
-	<form class="center_div" action="rideform.php" method="post">
+	<form class="center_div" action="rideresult.php" method="post">
    
 
 		<div class="row">
@@ -97,7 +64,7 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="resources/ridesform.js"></script>
+	<!-- // <script src="resources/ridesform.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>
