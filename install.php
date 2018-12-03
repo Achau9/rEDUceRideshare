@@ -46,13 +46,6 @@ try{
 				CONSTRAINT `fk_username` 
 				FOREIGN KEY (username) REFERENCES users (username)
 			);";
-// 	$sql=" CREATE TABLE `riders` (
-//   `id` int(11) NOT NULL,
-//   `username` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-//   `state` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-//   `city` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-//   `date` date NOT NULL
-// ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
 
 	$dbconn->exec($sql);
 
