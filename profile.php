@@ -1,6 +1,6 @@
 <?php 
   session_start(); 
-    echo $_SESSION['username'];
+    // echo $_SESSION['username'];
   if (!isset($_SESSION['username'])) {
   	// $_SESSION['msg'] = "You must log in first";
   	header('location: splashpage.php');
