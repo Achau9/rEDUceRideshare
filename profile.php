@@ -1,3 +1,16 @@
+<?php 
+  session_start(); 
+    echo $_SESSION['username'];
+  if (!isset($_SESSION['username'])) {
+  	// $_SESSION['msg'] = "You must log in first";
+  	header('location: splashpage.php');
+  }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['username']);
+  	header("location: splashpage.php");
+  }
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,35 +26,16 @@
     <title>Profile</title>
   </head>
   <body>
-     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.html">
-        <img src = "resources/images/logo.png" id = "logo"/>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          
-        </ul>
-        
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="login.html">Login</a></button>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="splashpage.html">Signup</a></button>
-      </div>
-    </nav>
+     <?php include 'nav.php';?>
   
-	<h1 id="title"><strong>Welcome user<div class="Type"></h1>
+	<h1 id="title"><strong>Welcome User<div class="Type"></h1>
 	<div class="center_div" action="rideform.php" method="post">
 		<div class="row">
 				<div class="col">
 				  <img src="https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg"></img>
 				</div>
 				<div class="col">
-				  <h2> John Smith </h2>
+				  <h2> <?php echo $_GET['user']; ?> </h2>
 				  <p> Troy, NY </p>
 				</div>
 		</div>
@@ -60,7 +54,6 @@
 				</div>
 				
 		</div>
-		
 		
 		
   </div>
