@@ -21,7 +21,7 @@ try{
 	$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   
   // drop all tables
-  $sql = "DROP TABLES IF EXISTS riders, users";
+  $sql = "DROP TABLES IF EXISTS drivers, riders, users";
   $dbconn->exec($sql);
 
 	// Create USERS table
@@ -29,6 +29,8 @@ try{
 		id int(11) NOT NULL AUTO_INCREMENT,
 		  username VARCHAR(100) CHARACTER SET utf8 NOT NULL,
 		  email VARCHAR(100) CHARACTER SET utf8 NOT NULL,
+		  city VARCHAR(100) CHARACTER SET utf8 NOT NULL,
+		  state VARCHAR(2) CHARACTER SET utf8 NOT NULL,
 		  password VARCHAR(100) CHARACTER SET utf8 NOT NULL,
 		  PRIMARY KEY (id)
     );
@@ -39,18 +41,30 @@ try{
 	$sql="CREATE TABLE IF NOT EXISTS `riders` (
 				rideid INT(11) AUTO_INCREMENT,
 				username VARCHAR(100) CHARACTER SET utf8 NOT NULL,
-				state VARCHAR(15) NOT NULL,
-				city VARCHAR(15) NOT NULL,
+				state VARCHAR(2) CHARACTER SET utf8 NOT NULL,
+				city VARCHAR(100) CHARACTER SET utf8 NOT NULL,
 				date DATE NOT NULL,
 				PRIMARY KEY (rideid),
-				CONSTRAINT `fk_username` 
+				CONSTRAINT `fk_rid_username` 
 				FOREIGN KEY (username) REFERENCES users (username)
 			);";
-
 	$dbconn->exec($sql);
 
+	$sql="CREATE TABLE IF NOT EXISTS `drivers` (
+		rideid INT(11) AUTO_INCREMENT,
+		username VARCHAR(100) CHARACTER SET utf8 NOT NULL,
+		state VARCHAR(2) NOT NULL,
+		city VARCHAR(100) CHARACTER SET utf8 NOT NULL,
+		date DATE NOT NULL,
+		PRIMARY KEY (rideid),
+		CONSTRAINT `fk_drv_username`
+		FOREIGN KEY (username) REFERENCES users (username)
+		);";
+	$dbconn->exec($sql);
+
+
 	$sql ="INSERT INTO `users` VALUES
-	(999999, '_', '_@_.com', 'passhash');";
+	(999999, '_', '_@_.com', 'passhash', 'Troy', 'NY');";
 	$dbconn->exec($sql);
 	
 	$sql="INSERT INTO `riders` VALUES

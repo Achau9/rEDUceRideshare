@@ -18,7 +18,7 @@
         <?php if (isset($_SESSION['username'])) : ?>
         <span style="color:lightgreen;">Welcome <strong>
                 <?php echo $_SESSION['username']; ?></strong> &ensp; </span>
-        <?php echo "<a class='btn btn-outline-warning' href='profile.php?user=".$_SESSION['username']."'> View Profile </a> <span>&ensp</span>"; ?>
+        <?php echo "<a class='btn btn-outline-warning' href='profile.php?user=".$_SESSION['username']."'> View Profile </a> <span>&ensp;</span>"; ?>
         <a class="btn btn-outline-danger" href="index.php?logout=1">Logout</a>
         <?php else: ?>
         <a class="btn btn-outline-success" href="login.php">Login</a>
