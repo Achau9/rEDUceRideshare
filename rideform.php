@@ -32,8 +32,10 @@
 			$ins->bindParam(':state',$state);
 			$ins->bindParam(':date',$date);
 			$ins->execute();
+			echo "<script> location.href='rideresult.php'; </script>";
 		}
 		catch(PDOException $e){
+			
 			echo "<br>" . $e->getMessage();
 		}
 	}
