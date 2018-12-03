@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	$server = 'localhost';
 	$user = 'root';
 	$pass = '';
@@ -13,19 +12,20 @@
 		$dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
 		$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$ins=$dbconn->prepare(
-			'INSERT INTO `riders` (username,state,city,date)
-			VALUES (:username,:city,:state,:date)'
+			'INSERT INTO `riders` (id,username,state,city,date)
+			VALUES (:id,:username,:city,:state,:date)'
 		);
-		$username=$_SESSION['username'];
+		$username="bob";
 		$dt=new DateTime($date);
 		$date=$dt->format('Y-m-d');
+		$ins->bindParam(':id',$id);
 		$ins->bindParam(':username',$username);
 		$ins->bindParam(':city',$city);
 		$ins->bindParam(':state',$state);
 		$ins->bindParam(':date',$date);
-		
 		$ins->execute();
 		echo "New records created successfully";
+		echo "<script> location.href='index.html'; </script>";
 	}
 	catch(PDOException $e){
 		echo "<br>" . $e->getMessage();
