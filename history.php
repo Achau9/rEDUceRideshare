@@ -32,7 +32,11 @@
     <?php include 'nav.php'; ?>
 
     <img class="History" src="resources/History.jpg" alt="History"/>
-    <div class="HistoryForm"><div class="HistoryOutput"></div></div>
+
+    <div class="HistoryForm">
+<!--     	<div class="HistoryOutput"></div>
+ -->	   <?php include 'history_output.php'; ?>
+    </div>
 
 
     <!-- Optional JavaScript -->
