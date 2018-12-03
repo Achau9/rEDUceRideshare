@@ -14,10 +14,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-
-
 // $sql = "SELECT id, firstname, lastname FROM MyGuests";
-$sql = "SELECT id, username, state, city, date FROM riders";
+$sql = "SELECT rideid, username, state, city, date FROM riders";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
