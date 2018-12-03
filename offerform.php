@@ -6,36 +6,7 @@
   	header('location: splashpage.php');
 	}
 	
-	$server = 'localhost';
-	$user = 'root';
-	$pass = '';
-	$dbname = 'rideshare';
-	if(isset($_POST['go'])){
-		try {
-			//create database
-			$city=$_POST['city'];
-			$state=$_POST['state'];
-			$date=$_POST['date'];
-			$dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
-			$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$ins=$dbconn->prepare(
-				'INSERT INTO `drivers` (rideid,username,state,city,date)
-				VALUES (:rideid,:username,:state,:city,:date)'
-			);
-			$username=$_SESSION['username'];
-			$dt=new DateTime($date);
-			$date=$dt->format('Y-m-d');
-			$ins->bindParam(':rideid',$id);
-			$ins->bindParam(':username',$username);
-			$ins->bindParam(':state',$state);
-			$ins->bindParam(':city',$city);
-			$ins->bindParam(':date',$date);
-			$ins->execute();
-		}
-		catch(PDOException $e){
-			echo "<br>" . $e->getMessage();
-		}
-	}
+
 ?>
 
 <!doctype html>
@@ -56,7 +27,7 @@
    <?php include 'nav.php'; ?>
   
 	<h1 id="title"><strong>rEDUce!<div class="Type"><u>DRIVERS</u></div></h1>
-	<form class="center_div" action="offerform.php" method="post">
+	<form class="center_div" action="offerrideresult.php" method="post">
    
 
 		<div class="row">
