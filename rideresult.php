@@ -30,22 +30,7 @@
    
    <h1 id="title"><strong>rEDUce</strong></h1>
 
-   <div class="content">
-      <!-- notification message -->
-      <?php if (isset($_SESSION['success'])) : ?>
-        <div class="error success" >
-          <h3>
-            <?php 
-              echo $_SESSION['success']; 
-              unset($_SESSION['success']);
-            ?>
-          </h3>
-        </div>
-      <?php endif ?>
-  
-      <!-- logged in user information -->
-      
-  </div>
+   
 <?php
   $server = 'localhost';
   $user = 'root';
@@ -83,7 +68,7 @@
       foreach($result as $value){
         echo("<div class = \"results\"><ul class=\"list-unstyled mt-3 mb-4\">");
         echo("<li><h3>Driver:$value[username]</h3></li><li>Departure Date: $value[date]</li><li>Destination: $value[city], $value[state]</li></ul><button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">
-            <a href =\"\">View Profile<a>
+            <a href =\"profile.php?user=$value[username]\">View Profile<a>
           </button></div>");
         
       }
