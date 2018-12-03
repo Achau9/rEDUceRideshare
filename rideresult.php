@@ -46,6 +46,58 @@
       <!-- logged in user information -->
       
   </div>
+<?php
+  $server = 'localhost';
+  $user = 'root';
+  $pass = '';
+  $dbname = 'rideshare';
+  if(isset($_POST['go'])){
+    try {
+      //create database
+      $city=$_POST['city'];
+      $state=$_POST['state'];
+      $r_date=$_POST['date'];
+      $dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
+      $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $ins=$dbconn->prepare(
+        'INSERT INTO `riders` (rideid,username,state,city,date)
+        VALUES (:rideid,:username,:state,:city,:date)'
+      );
+      $username=$_SESSION['username'];
+      $dt=new DateTime($r_date);
+      $r_date=$dt->format('Y-m-d');
+      $ins->bindParam(':rideid',$id);
+      $ins->bindParam(':username',$username);
+      $ins->bindParam(':state',$state);
+      $ins->bindParam(':city',$city);
+      $ins->bindParam(':date',$r_date);
+      $ins->execute();
+      
+      // $query = $dbconn->prepare('SELECT * FROM `drivers` WHERE state = :d_state AND city = :d_state;');
+      // $query->execute(array(':d_state'=>$state,':d_city'=>$city));
+      $query = $dbconn->prepare('SELECT * FROM `drivers`;');
+      $query->execute();
+
+      $result = $query->fetchAll();
+      // var_dump($result);
+      foreach($result as $value){
+        echo("<div class = \"results\"><ul class=\"list-unstyled mt-3 mb-4\">");
+        echo("<li><h3>Driver:$value[username]</h3></li><li>Departure Date: $value[date]</li><li>Destination: $value[city], $value[state]</li></ul><button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">
+            <a href =\"\">View Profile<a>
+          </button></div>");
+        
+      }
+      // var_dump($result);
+      // echo("$result");
+      
+    }
+    catch(PDOException $e){
+      
+      echo "<br>" . $e->getMessage();
+    }
+  }
+
+?>
   <div class = "results">
     <ul class="list-unstyled mt-3 mb-4">
       <li>30 users included</li>
