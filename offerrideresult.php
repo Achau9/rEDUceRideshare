@@ -72,7 +72,7 @@
         echo("<div class = \"results\"><ul class=\"list-unstyled mt-3 mb-4\">");
         echo("<li><h3>Riders:$value[username]</h3></li><li>Departure Date: $value[date]</li><li>Destination: $value[city], $value[state]</li></ul>
           <a class='btn btn-outline-success my-2 my-sm-0' href =\"profile.php?user=$value[username]\">View Profile</a>
-          <a class='btn btn-outline-success my-2 my-sm-0' href ='offerrideresult.php?accept=true&rideid=".$value["rideid"]."&state=".$value["state"]."&city=".$value["city"]."&date=".$value["date"]."&clicked=TRUE"."'>Accept Ride</a>
+          <a class='btn btn-outline-success my-2 my-sm-0' href ='offerrideresult.php?accept=true&rideid=".$value["rideid"]."&state=".$value["state"]."&city=".$value["city"]."&date=".$value["date"]."'>Accept Ride</a>
           </div>");
         
       }
@@ -97,9 +97,6 @@
       $rideid = $_GET['rideid'];
       $city = $_GET['city'];
       $state = $_GET['state'];
-      if($_GET['clicked'] != TRUE){
-        $r_date =$_GET["date"];
-      }
       $r_date =$_GET["date"];
       $ins->execute();
       $query = $dbconn->prepare('SELECT * FROM `riders` WHERE state = :d_state AND city = :d_city AND date >= :d_date AND accepted = FALSE;');
@@ -113,10 +110,12 @@
         echo("<div class = \"results\"><ul class=\"list-unstyled mt-3 mb-4\">");
         echo("<li><h3>Riders:$value[username]</h3></li><li>Departure Date: $value[date]</li><li>Destination: $value[city], $value[state]</li></ul>
           <a class='btn btn-outline-success my-2 my-sm-0' href =\"profile.php?user=$value[username]\">View Profile</a>
-          <a class='btn btn-outline-success my-2 my-sm-0' href ='offerrideresult.php?accept=true&rideid=".$rideid."&state=".$state."&city=".$city."&date=".$r_date."&clicked=TRUE"."'>Accept Ride</a>
+          <a class='btn btn-outline-success my-2 my-sm-0' href ='offerrideresult.php?accept=true&rideid=".$rideid."&state=".$state."&city=".$city."&date=".$r_date."'>Accept Ride</a>
           </div>");
+
         
       }
+      echo "<script> location.href='index.php'; </script>";
       // var_dump($result);
       // echo("$result");
       
