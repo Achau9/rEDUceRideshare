@@ -11,8 +11,8 @@
     </head>
 
     <body class="text-center loginbody">
-        <form class="form-signin" method="post" action="register.php" onclick='location.href="index.php"'>
-            <img class="mb-4" src="./resources/images/logo.png" alt="" width="72" height="72">
+        <form class="form-signin" method="post" action="register.php">
+            <img class="mb-4" src="./resources/images/logo.png" alt="" width="72" height="72" onclick='location.href="index.php"'>
             <?php include('errors.php'); ?>
             <h1 class="h3 mb-3 font-weight-normal" style="color:green;">Please register</h1>
             <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required
