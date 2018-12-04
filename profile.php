@@ -45,6 +45,7 @@
 				<div class="col">
 				  <h2> <?php echo $_GET['user']; ?> </h2>
 				  <p> <?php include 'profile_location.php'; ?> </p>
+                  <p> Rating: </p>
                   <br>
                   <a class='btn btn-outline-success' href='profile.php?user=".$_SESSION['username']."&new_comment=true'> Add User Review </a> <span>&ensp;</span>
 				</div>
