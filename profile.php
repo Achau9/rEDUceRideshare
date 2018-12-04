@@ -88,13 +88,14 @@ if (isset($_GET['user'])) {
             <h3 style="margin-bottom:5px;">
                 <?php include 'profile_location.php'; ?>
             </h3>
+            <br>
             <div class="col">
-                <div style="height:400px;overflow:auto;border:8px double green;padding:2%;">
-                    <h2>Reviews: </h2>
+                <h2>Reviews: </h2>
+                <div style="text-align:left;margin:auto;width:500px;height:300px;overflow:auto;border:8px double green;padding:2%;">
                     <?php include 'profile_comments.php'; ?>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="border:8px hidden;padding:2%;">
                 <?php if (!($_SESSION['username'] === $_GET['user'])) { ?>
                 <?php echo ("<form class='center_div' action='profile.php?user=$_GET[user]' method='post'>"); ?>
                 <div class="col">
@@ -102,6 +103,7 @@ if (isset($_GET['user'])) {
                     <span style="color:black;">Review Text:<span>
                             <textarea name="review" type="text" class="form-control" placeholder=""></textarea>
                 </div>
+                
                 <div class="col">
                     <span style="color:black;">Star Rating:</span>
                     <select name="rating">
