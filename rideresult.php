@@ -42,11 +42,12 @@
       $city=$_POST['city'];
       $state=$_POST['state'];
       $r_date=$_POST['date'];
+      $a = FALSE;
       $dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
       $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $ins=$dbconn->prepare(
-        'INSERT INTO `riders` (rideid,username,state,city,date)
-        VALUES (:rideid,:username,:state,:city,:date)'
+        'INSERT INTO `riders` (rideid,username,state,city,date,accepted)
+        VALUES (:rideid,:username,:state,:city,:date,:accepted)'
       );
       $username=$_SESSION['username'];
       $dt=new DateTime($r_date);
@@ -56,6 +57,7 @@
       $ins->bindParam(':state',$state);
       $ins->bindParam(':city',$city);
       $ins->bindParam(':date',$r_date);
+      $ins->bindParam(':accepted',$a);
       $ins->execute();
       
       $query = $dbconn->prepare('SELECT * FROM `drivers` WHERE state = :d_state AND city = :d_city AND date >= :d_date;');
@@ -68,7 +70,7 @@
       foreach($result as $value){
         echo("<div class = \"results\"><ul class=\"list-unstyled mt-3 mb-4\">");
         echo("<li><h3>Driver:$value[username]</h3></li><li>Departure Date: $value[date]</li><li>Destination: $value[city], $value[state]</li></ul><button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">
-            <a href =\"profile.php?user=$value[username]\">View Profile<a>
+            <a href =\"profile.php?user=$value[username]\">View Profile</a>
           </button></div>");
         
       }
