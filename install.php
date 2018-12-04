@@ -44,6 +44,7 @@ try{
 				state VARCHAR(2) CHARACTER SET utf8 NOT NULL,
 				city VARCHAR(100) CHARACTER SET utf8 NOT NULL,
 				date DATE NOT NULL,
+				accepted BOOLEAN NOT NULL,
 				PRIMARY KEY (rideid),
 				CONSTRAINT `fk_rid_username`
 				FOREIGN KEY (username) REFERENCES users (username)
@@ -68,17 +69,17 @@ try{
 	$dbconn->exec($sql);
 
 	$sql="INSERT INTO `riders` VALUES
-	(NULL, '_', 'NY', 'Troy', '2006-01-03'),
-	(NULL, '_', 'NY', 'Troy', '2006-03-02'),
-	(NULL, '_', 'NY', 'Troy', '2009-05-06'),
-	(NULL, '_', 'NY', 'Troy', '2009-01-19'),
-	(NULL, '_', 'NY', 'Troy', '2012-02-01'),
-	(NULL, '_', 'NY', 'Troy', '2013-03-02'),
-	(NULL, '_', 'NY', 'Troy', '2013-03-04'),
-	(NULL, '_', 'NJ', 'Tims', '2016-12-19'),
-	(NULL, '_', 'NJ', 'Tims', '2017-12-07'),
-	(NULL, '_', 'NJ', 'Tims', '2018-02-02'),
-	(NULL, '_', 'NJ', 'Tims', '2018-12-06');";
+	(NULL, '_', 'NY', 'Troy', '2006-01-03',FALSE),
+	(NULL, '_', 'NY', 'Troy', '2006-03-02',FALSE),
+	(NULL, '_', 'NY', 'Troy', '2009-05-06',FALSE),
+	(NULL, '_', 'NY', 'Troy', '2009-01-19',FALSE),
+	(NULL, '_', 'NY', 'Troy', '2012-02-01',FALSE),
+	(NULL, '_', 'NY', 'Troy', '2013-03-02',FALSE),
+	(NULL, '_', 'NY', 'Troy', '2013-03-04',FALSE),
+	(NULL, '_', 'NJ', 'Tims', '2016-12-19',FALSE),
+	(NULL, '_', 'NJ', 'Tims', '2017-12-07',FALSE),
+	(NULL, '_', 'NJ', 'Tims', '2018-02-02',FALSE),
+	(NULL, '_', 'NJ', 'Tims', '2018-12-06',FALSE);";
 
 	$dbconn->exec($sql);
 
