@@ -33,6 +33,7 @@
          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link href="resources/style.css" rel="stylesheet" type="text/css">
         <title>Profile</title>
+        
   </head>
   <body>
      <?php include 'nav.php';?>
@@ -43,12 +44,17 @@
 		<div class="row">
 				<div class="col">
 				  <h2> <?php echo $_GET['user']; ?> </h2>
-				  <p> Troy, NY </p>
+				  <p> <?php include 'profile_location.php'; ?> </p>
+                  <p> Rating: </p>
+                  <br>
+                  <a class='btn btn-outline-success' href='profile.php?user=".$_SESSION['username']."&new_comment=true'> Add User Review </a> <span>&ensp;</span>
 				</div>
             
-                <div class="col" style="height:400px;width:140px;overflow:auto;border:8px double green;padding:2%;width: 75%;">
+                <div class="col">
                     <h2>Reviews: </h2>
-                    <?php include 'profile_query.php'; ?>
+                    <div style="height:400px;width:140px;overflow:auto;border:8px double green;padding:2%;width: 75%;">
+                        <?php include 'profile_comments.php'; ?>
+                    </div>
             </div>
 		</div>		
   </div>
