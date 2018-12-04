@@ -14,6 +14,7 @@ Project Installation:
         (should be redirected to the splashpage unless logged in)
 
 Project Features:
+
     1. User Registration / Login:
         User registration and login is completed securly through PHP,
         Usernames and Passwords are stored in the 'users' table, and 
