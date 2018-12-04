@@ -49,17 +49,28 @@ try{
 				FOREIGN KEY (username) REFERENCES users (username)
 			);";
 	$dbconn->exec($sql);
+    
+    // Create RIDERS table
+	$sql="CREATE TABLE IF NOT EXISTS `riders` (
+				rideid INT(11) AUTO_INCREMENT,
+				username VARCHAR(100) CHARACTER SET utf8 NOT NULL,
+				state VARCHAR(2) CHARACTER SET utf8 NOT NULL,
+				city VARCHAR(100) CHARACTER SET utf8 NOT NULL,
+				date DATE NOT NULL,
+				PRIMARY KEY (rideid),
+				CONSTRAINT `fk_rid_username`
+				FOREIGN KEY (username) REFERENCES users (username)
+			);";
+	$dbconn->exec($sql);
 
-	$sql="CREATE TABLE IF NOT EXISTS `drivers` (
-		rideid INT(11) AUTO_INCREMENT,
-		username VARCHAR(100) CHARACTER SET utf8 NOT NULL,
-		state VARCHAR(2) NOT NULL,
-		city VARCHAR(100) CHARACTER SET utf8 NOT NULL,
-		date DATE NOT NULL,
-		PRIMARY KEY (rideid),
-		CONSTRAINT `fk_drv_username`
-		FOREIGN KEY (username) REFERENCES users (username)
-		);";
+	$sql="CREATE TABLE IF NOT EXISTS `comments` (
+		CommentID INT(11) AUTO_INCREMENT,
+		ReviewedUser VARCHAR(100) CHARACTER SET utf8 NOT NULL,
+		ReviewPoster VARCHAR(100) CHARACTER SET utf8 NOT NULL,
+		StarRating INT(1),
+        TextReview VARCHAR(2000) CHARACTER SET utf8 NOT NULL,
+        PRIMARY KEY (CommentID),
+        );";
 	$dbconn->exec($sql);
 
 
