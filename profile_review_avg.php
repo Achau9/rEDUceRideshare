@@ -23,7 +23,6 @@ $dbname = "rideshare";
     // Get all comments for specified user";
     $sql = "SELECT ROUND(AVG(StarRating),2) as aver FROM comments c WHERE '$user_var' = c.ReviewedUser";
     $result = $conn->query($sql);
-
     
     $avgVar = ($result->fetch_object())->aver;
 
