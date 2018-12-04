@@ -15,7 +15,7 @@ if (isset($_POST['reg_user'])) {
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $email = mysqli_real_escape_string($db, $_POST['email']);
   $city = mysqli_real_escape_string($db, $_POST['city']);
-  $city = mysqli_real_escape_string($db, $_POST['state']);
+  $state = mysqli_real_escape_string($db, $_POST['state']);
   $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
   $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
 
