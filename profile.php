@@ -10,43 +10,51 @@
   	unset($_SESSION['username']);
   	header("location: splashpage.php");
 	}
+if (isset($_GET['user'])) {
+	$dbconn = new PDO("mysql:host=localhost;dbname=rideshare", 'root', '');
+	$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$res = $dbconn->query("SELECT count(*) FROM users WHERE username = '".$_GET['user']."';");
+	if ($res->fetchColumn() <= 0){
+		// maybe make an error page?
+		header("location: index.php");
+	}
+}
+	if (isset($_POST['review'])) {
+		try {
+		//create database
+		$server = 'localhost';
+		$user = 'root';
+		$pass = '';
+		$dbname = 'rideshare';
+		$review=$_POST['review'];
+		$rating=$_POST['rating'];
+		if($rating!=0){
+			$dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
+			$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$ins=$dbconn->prepare(
+				'INSERT INTO `comments` (CommentID,ReviewedUser,ReviewPoster,StarRating,TextReview)
+				VALUES (:CommentID,:ReviewedUser,:ReviewPoster,:StarRating,:TextReview)'
+			);
+			$username=$_SESSION['username'];
+			$reviewed=$_GET['user'];
+			$ins->bindParam(':CommentID',$id);
+			$ins->bindParam(':ReviewedUser',$reviewed);
+			$ins->bindParam(':ReviewPoster',$username);
+			$ins->bindParam(':StarRating',$rating);
+			$ins->bindParam(':TextReview',$review);
+			$ins->execute();
+		}
 
 
-	try {
-      //create database
+		// var_dump($result);
+		// echo("$result");
 
-	  $server = 'localhost';
-	  $user = 'root';
-      $pass = '';
-	  $dbname = 'rideshare';
-      $review=$_POST['review'];
-      $rating=$_POST['rating'];
-	  if($rating!=0){
-		  $dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
-		  $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		  $ins=$dbconn->prepare(
-			'INSERT INTO `comments` (CommentID,ReviewedUser,ReviewPoster,StarRating,TextReview)
-			VALUES (:CommentID,:ReviewedUser,:ReviewPoster,:StarRating,:TextReview)'
-		  );
-		  $username=$_SESSION['username'];
-		  $reviewed=$_GET['user'];
-		  $ins->bindParam(':CommentID',$id);
-		  $ins->bindParam(':ReviewedUser',$reviewed);
-		  $ins->bindParam(':ReviewPoster',$username);
-		  $ins->bindParam(':StarRating',$rating);
-		  $ins->bindParam(':TextReview',$review);
-		  $ins->execute();
-	  }
+		}
+		catch(PDOException $e){
 
-
-      // var_dump($result);
-      // echo("$result");
-
-    }
-    catch(PDOException $e){
-
-      echo "<br>" . $e->getMessage();
-    }
+		  echo "<br>" . $e->getMessage();
+		}
+	}
 ?>
 <!doctype html>
 <html lang="en">
@@ -63,47 +71,49 @@
         <link href="resources/style.css" rel="stylesheet" type="text/css">
         <title>Profile</title>
 
-  </head>
-  <body>
-     <?php include 'nav.php';?>
-    <br>
-    <br>
-	<h1 id="title"><strong><?php echo $_GET['user']?>'s Profile<div class="Type"></h1>
-	<div class="center_div" action="rideform.php" method="post">
-		<div class="row">
-				<div class="col">
-				  <h2> <?php echo $_GET['user']; ?> </h2>
-				  <p> <?php include 'profile_location.php'; ?> </p>
-                  <br>
-				 <?php echo ("<form class='center_div' action='profile.php?user=$_GET[user]' method='post'>"); ?>
-						<div class="row">
-							<div class="col">
-							  <textarea name="review" type="text" class="form-control" placeholder=""></textarea>
-							</div>
-							<div class="col">
-							  <select name="rating">
-								  <option value=""></option>
-								  <option value="5">5</option>
-								  <option value="4">4</option>
-								  <option value="3">3</option>
-								  <option value="2">2</option>
-								  <option value="1">1</option>
-								</select>
-							</div>
-						</div>
-						<br>
+    </head>
 
-						<br>
-
-						 <button class="btn btn-outline-success" type="submit"name="go">GO</button>
-				  </form>
-				</div>
-
+    <body>
+        <?php include 'nav.php';?>
+        <br>
+        <br>
+        <h1 id="title" style="margin-bottom:3px;"><strong>
+                <?php echo $_GET['user']?>'s Profile
+                <!-- <div class="Type"> -->
+        </h1>
+        <div class="center_div text-center" action="profile.php" method="post">
+            <p>
+                <?php include 'profile_location.php'; ?>
+            </p>
+            <p>
+                <?php include 'profile_review_avg.php'; ?>
+            </p>
+            <div class="row">
+                <?php if (!($_SESSION['username'] === $_GET['user'])) { ?>
+                <?php echo ("<form class='center_div' action='profile.php?user=$_GET[user]' method='post'>"); ?>
                 <div class="col">
-                    <h2>Reviews: </h2>
-                    <div style="height:400px;width:140px;overflow:auto;border:8px double green;padding:2%;width: 75%;">
-                        <?php include 'profile_comments.php'; ?>
-                    </div>
+                    <textarea name="review" type="text" class="form-control" placeholder=""></textarea>
+                </div>
+                <div class="col">
+                    <select name="rating">
+                        <option value=""></option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <button class="btn btn-outline-success" type="submit" name="go">GO</button>
+                </form>
+            </div>
+            <?php } ?>
+
+            <div class="col">
+                <h2>Reviews: </h2>
+                <div style="height:400px;width:140px;overflow:auto;border:8px double green;padding:2%;width: 75%;">
+                    <?php include 'profile_comments.php'; ?>
+                </div>
 
             </div>
         </div>

@@ -25,8 +25,8 @@
         <!-- <?php include 'nav.php'; ?> -->
 
         <form class="form-signin" method="post" action="login.php">
-            <img class="mb-4" src="./resources/images/logo.png" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <img class="mb-4" src="./resources/images/logo.png" alt="" width="72" height="72" onclick='location.href="index.php"'>
+            <h1 class="h3 mb-3 font-weight-normal" style="color:green;">Please sign in</h1>
             <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required
                 autofocus>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password"
@@ -34,7 +34,7 @@
             <div class="checkbox mb-3">
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit" name="login_user">Sign in</button>
-            <a class="btn btn-lg btn-secondary btn-block" href='register.php'>New User?
+            <a class="btn btn-md btn-secondary btn-block" href='register.php'>New User?
                 Register!</a>
             <p class="mt-5 mb-3 text-muted">2018</p>
         </form>

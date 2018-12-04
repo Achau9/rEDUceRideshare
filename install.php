@@ -31,7 +31,7 @@ try{
 		  email VARCHAR(100) CHARACTER SET utf8 NOT NULL,
 		  city VARCHAR(100) CHARACTER SET utf8 NOT NULL,
 		  state VARCHAR(2) CHARACTER SET utf8 NOT NULL,
-		  password VARCHAR(100) CHARACTER SET utf8 NOT NULL,
+		  password VARCHAR(255) CHARACTER SET utf8 NOT NULL,
 		  PRIMARY KEY (id)
     );
     CREATE INDEX  `username_idx` ON users(username)";

@@ -1,5 +1,5 @@
 <!-- <div class="HistoryOutput">
- -->  
+ -->
 <!-- </div> -->
 <?php
 $servername = "localhost";
@@ -22,7 +22,7 @@ $from = "SELECT city, state FROM users c WHERE '$user_var'=c.username";
 $result = $conn->query($from);
 $row = $result->fetch_assoc();
 
-echo $row['city'],", ",$row['state'];
+echo 'From: '.$row['city'],", ",$row['state'];
 
 $conn->close();
 ?>

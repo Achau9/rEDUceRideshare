@@ -11,23 +11,25 @@
     </head>
 
     <body class="text-center loginbody">
-        <!-- <div class="header">
-            <h2>Register</h2>
-        </div> -->
-
-        <form class="form-signin" method="post" action="register.php">
+        <form class="form-signin" method="post" action="register.php" onclick='location.href="index.php"'>
             <img class="mb-4" src="./resources/images/logo.png" alt="" width="72" height="72">
             <?php include('errors.php'); ?>
+            <h1 class="h3 mb-3 font-weight-normal" style="color:green;">Please register</h1>
             <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required
                 autofocus>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email" name="email" required>
-            <input type="text" id="inputCity" class="form-control" placeholder="Home City" name="city" required>
-            <input type="text" id="inputState" class="form-control" placeholder="Home State" name="state" required>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email" name="email" maxlength="100"
+                required>
+            <input type="text" id="inputCity" class="form-control" placeholder="Home City" name="city" maxlength="100"
+                required>
+            <input type="text" id="inputState" class="form-control" placeholder="Home State" name="state" maxlength="2"
+                required>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password_1"
                 required>
             <input type="password" id="inputPassword" class="form-control" placeholder="Repeat Password" name="password_2"
                 required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit" name="reg_user">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="reg_user">Sign up!</button>
+            <a class="btn btn-md btn-secondary btn-block" href='login.php'>Already a user? Sign in!</a>
+
             <p class="mt-5 mb-3 text-muted">2018</p>
         </form>
 
