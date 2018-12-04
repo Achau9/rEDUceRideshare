@@ -19,11 +19,11 @@ if (isset($_POST['reg_user'])) {
 
   // form validation: ensure that the form is correctly filled ...
   // by adding (array_push()) corresponding error unto $errors array
-  if (empty($username)) { array_push($errors, "Username is required"); }
-  if (empty($email)) { array_push($errors, "Email is required"); }
-  if (empty($password_1)) { array_push($errors, "Password is required"); }
+  if (empty($username)) { array_push($errors, "username is required"); }
+  if (empty($email)) { array_push($errors, "email is required"); }
+  if (empty($password_1)) { array_push($errors, "password is required"); }
   if ($password_1 != $password_2) {
-	array_push($errors, "The two passwords do not match");
+	array_push($errors, "the two passwords do not match");
   }
 
   // first check the database to make sure 
@@ -34,7 +34,7 @@ if (isset($_POST['reg_user'])) {
   
   if ($user) { // if user exists
     if ($user['username'] === $username) {
-      array_push($errors, "Username already exists");
+      array_push($errors, "username already exists");
     }
 
     if ($user['email'] === $email) {
@@ -60,10 +60,10 @@ if (isset($_POST['login_user'])) {
     $password = mysqli_real_escape_string($db, $_POST['password']);
   
     if (empty($username)) {
-        array_push($errors, "Username is required");
+        array_push($errors, "username is required");
     }
     if (empty($password)) {
-        array_push($errors, "Password is required");
+        array_push($errors, "password is required");
     }
   
     if (count($errors) == 0) {
@@ -75,7 +75,7 @@ if (isset($_POST['login_user'])) {
           $_SESSION['success'] = "You are now logged in";
           header('location: index.php');
         }else {
-            array_push($errors, "Wrong username/password combination");
+            array_push($errors, "wrong username and password combination");
         }
     }
   }
