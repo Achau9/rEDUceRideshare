@@ -42,11 +42,12 @@
       $city=$_POST['city'];
       $state=$_POST['state'];
       $r_date=$_POST['date'];
+      $a = FALSE;
       $dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
       $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $ins=$dbconn->prepare(
-        'INSERT INTO `riders` (rideid,username,state,city,date)
-        VALUES (:rideid,:username,:state,:city,:date)'
+        'INSERT INTO `riders` (rideid,username,state,city,date,accepted)
+        VALUES (:rideid,:username,:state,:city,:date,:accepted)'
       );
       $username=$_SESSION['username'];
       $dt=new DateTime($r_date);
@@ -56,9 +57,10 @@
       $ins->bindParam(':state',$state);
       $ins->bindParam(':city',$city);
       $ins->bindParam(':date',$r_date);
+      $ins->bindParam(':accepted',$a);
       $ins->execute();
       
-      $query = $dbconn->prepare('SELECT * FROM `drivers` WHERE state = :d_state AND city = :d_city AND date >= :d_date;');
+      $query = $dbconn->prepare('SELECT * FROM `riders` WHERE state = :d_state AND city = :d_city AND date >= :d_date AND accepted = FALSE;');
       $query->execute(array(':d_state'=>$state,':d_city'=>$city,':d_date'=>$r_date));
       // $query = $dbconn->prepare('SELECT * FROM `drivers`;');
       $query->execute();
@@ -67,11 +69,53 @@
       // var_dump($result);
       foreach($result as $value){
         echo("<div class = \"results\"><ul class=\"list-unstyled mt-3 mb-4\">");
-        echo("<li><h3>Driver:$value[username]</h3></li><li>Departure Date: $value[date]</li><li>Destination: $value[city], $value[state]</li></ul><button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">
-            <a href =\"profile.php?user=$value[username]\">View Profile</a>
+        echo("<li><h3>Riders:$value[username]</h3></li><li>Departure Date: $value[date]</li><li>Destination: $value[city], $value[state]</li></ul><button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">
+            <a href =\"profile.php?user=$value[username]\">View Profile<a>
+          </button><button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\"name=\"accept\"'>
+            <a href ='offerrideresult.php?rideid=".$value["rideid"]."&state=".$state."&city=".$city."&date=".$r_date."'>Accept Ride</a>
           </button></div>");
         
       }
+
+      // var_dump($result);
+      // echo("$result");
+      
+    }
+    catch(PDOException $e){
+      
+      echo "<br>" . $e->getMessage();
+    }
+  }else if(isset($_GET['accept'])){
+    try {
+      //create database
+      
+      $a = FALSE;
+      $dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
+      $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $ins=$dbconn->prepare(
+        "UPDATE `riders` SET accepted=TRUE WHERE rideid = '".$_GET['rideid']."'"
+      );
+      $city = $_GET('city');
+      $state = $_GET('state');
+      $r_date =$_GET("date");
+      
+      $query = $dbconn->prepare('SELECT * FROM `riders` WHERE state = :d_state AND city = :d_city AND date >= :d_date AND accepted = FALSE;');
+      $query->execute(array(':d_state'=>$state,':d_city'=>$city,':d_date'=>$r_date));
+      // $query = $dbconn->prepare('SELECT * FROM `drivers`;');
+      $query->execute();
+      echo("asd");
+      $result = $query->fetchAll();
+      // var_dump($result);
+      foreach($result as $value){
+        echo("<div class = \"results\"><ul class=\"list-unstyled mt-3 mb-4\">");
+        echo("<li><h3>Riders:$value[username]</h3></li><li>Departure Date: $value[date]</li><li>Destination: $value[city], $value[state]</li></ul><button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">
+            <a href =\"profile.php?user=$value[username]\">View Profile<a>
+          </button><button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\"name=\"accept\"'>
+            <a href ='offerrideresult.php?rideid=".$value["rideid"]."&state=".$state."&city=".$city."&date=".$r_date."'>Accept Ride</a>
+          </button></div>");
+        
+      }
+
       // var_dump($result);
       // echo("$result");
       
