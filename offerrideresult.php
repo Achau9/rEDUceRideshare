@@ -48,8 +48,8 @@
       $dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
       $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $ins=$dbconn->prepare(
-        'INSERT INTO `riders` (rideid,username,state,city,date,accepted)
-        VALUES (:rideid,:username,:state,:city,:date,:accepted)'
+        'INSERT INTO `drivers` (rideid,username,state,city,date)
+        VALUES (:rideid,:username,:state,:city,:date)'
       );
       $username=$_SESSION['username'];
       $dt=new DateTime($r_date);
@@ -59,7 +59,7 @@
       $ins->bindParam(':state',$state);
       $ins->bindParam(':city',$city);
       $ins->bindParam(':date',$r_date);
-      $ins->bindParam(':accepted',$a);
+      
       $ins->execute();
       
       $query = $dbconn->prepare('SELECT * FROM `riders` WHERE state = :d_state AND city = :d_city AND date >= :d_date AND accepted = FALSE;');
