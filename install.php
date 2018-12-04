@@ -75,7 +75,7 @@ try{
 
 
 	$sql ="INSERT INTO `users` VALUES
-	(999999, '_', '_@_.com', 'passhash', 'Troy', 'NY');";
+	(999999, '_', '_@_.com', 'Troy', 'NY', 'passhash');";
 	$dbconn->exec($sql);
 
 	$sql="INSERT INTO `riders` VALUES

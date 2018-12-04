@@ -21,22 +21,16 @@ if ($conn->connect_error) {
 // Get current profile's username
 $user_var = $_GET['user'];
 
+
+
 // Get all comments for specified user";
-$sql = "SELECT * FROM comments c WHERE '$user_var' = c.ReviewedUser";
+$sql = "SELECT ROUND(AVG(StarRating),2) as average FROM comments c WHERE '$user_var' = c.ReviewedUser";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    // output comments in each row and calculate star rating
-    while($row = $result->fetch_assoc()) {
-        echo "&nbsp;&nbsp;" . $row["ReviewPoster"] . ": " . $row["StarRating"] . " Stars";?>
-    <div style=margin-left:45px;>
-        <?php echo $row["TextReview"]; ?>
-    </div>
-    <?php
-    }
-    echo "<br><br>";
+    echo 'Average Rating: '.$result->fetch_object()->average.'/5';
 } else {
-    echo "No comments exist yet for this user";
+    echo "User not yet rated";
 }
 $conn->close();
 ?>

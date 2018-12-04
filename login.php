@@ -34,6 +34,8 @@
             <div class="checkbox mb-3">
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit" name="login_user">Sign in</button>
+            <a class="btn btn-lg btn-secondary btn-block" href='register.php'>New User?
+                Register!</a>
             <p class="mt-5 mb-3 text-muted">2018</p>
         </form>
 
