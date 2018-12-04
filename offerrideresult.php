@@ -74,7 +74,7 @@
         echo("<div class = \"results\"><ul class=\"list-unstyled mt-3 mb-4\">");
         echo("<li><h3>Riders:$value[username]</h3></li><li>Departure Date: $value[date]</li><li>Destination: $value[city], $value[state]</li></ul>
           <a class='btn btn-outline-success my-2 my-sm-0' href =\"profile.php?user=$value[username]\">View Profile</a>
-          <a class='btn btn-outline-success my-2 my-sm-0' href ='offerrideresult.php?rideid=".$value["rideid"]."&state=".$state."&city=".$city."&date=".$r_date."'>Accept Ride</a>
+          <a class='btn btn-outline-success my-2 my-sm-0' href ='offerrideresult.php?accept=true&rideid=".$value["rideid"]."&state=".$state."&city=".$city."&date=".$r_date."'>Accept Ride</a>
           </div>");
         
       }
@@ -97,9 +97,9 @@
       $ins=$dbconn->prepare(
         "UPDATE `riders` SET accepted=TRUE WHERE rideid = '".$_GET['rideid']."'"
       );
-      $city = $_GET('city');
-      $state = $_GET('state');
-      $r_date =$_GET("date");
+      $city = $_GET['city'];
+      $state = $_GET['state'];
+      $r_date =$_GET["date"];
       
       $query = $dbconn->prepare('SELECT * FROM `riders` WHERE state = :d_state AND city = :d_city AND date >= :d_date AND accepted = FALSE;');
       $query->execute(array(':d_state'=>$state,':d_city'=>$city,':d_date'=>$r_date));
