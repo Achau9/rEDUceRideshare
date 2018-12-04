@@ -21,7 +21,7 @@ try{
 	$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   // drop all tables
-  $sql = "DROP TABLES IF EXISTS drivers, riders, users";
+  $sql = "DROP TABLES IF EXISTS comments, drivers, riders, users";
   $dbconn->exec($sql);
 
 	// Create USERS table
@@ -69,7 +69,7 @@ try{
 		ReviewPoster VARCHAR(100) CHARACTER SET utf8 NOT NULL,
 		StarRating INT(1),
         TextReview VARCHAR(2000) CHARACTER SET utf8 NOT NULL,
-        PRIMARY KEY (CommentID),
+        PRIMARY KEY (CommentID)
         );";
 	$dbconn->exec($sql);
 
