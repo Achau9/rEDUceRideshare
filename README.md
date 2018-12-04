@@ -5,12 +5,12 @@ Project Installation:
     Using an XAMPP Environment (used for development) the install is as follows: 
     
     1. Start Apache and MySQL Servers
-    1. Navigate to the address that the server is serving the site on
+    2. Navigate to the address that the server is serving the site on
        and nagivate to the install.php file
         ex: labs.websys/rEDUceRideshare/install.php
        this step installs the database and all the proper tables
         (with some test data).
-    1. Now simply navigate to the index.php of the site
+    3. Now simply navigate to the index.php of the site
         (should be redirected to the splashpage unless logged in)
 
 Project Features:
@@ -21,13 +21,13 @@ Project Features:
         in PHP. This function stores the salt inline with the hashed password
         so there is no need for a seperate salt column in the users table.
 
-    1. Posting as a Rider
+    2. Posting as a Rider
         TODO: Fill in
 
-    1. Posting as a Driver
+    3. Posting as a Driver
         TODO: Fill in
 
-    1. Profiles
+    4. Profiles
         Profile pages are generated via a GET request with a given username
             ex: profile.php?user=bob
         This loads the user's username, "home" location, average review score
@@ -37,7 +37,7 @@ Project Features:
         home page.
 
 
-    1. Profile Reviews
+    5. Profile Reviews
         Users viewing profiles other than their own are able to post reviews
         with review text and a star rating. This is then displayed on the profile
         page, and updated the "average review" calculation also displayed on the page.
