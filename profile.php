@@ -82,19 +82,28 @@ if (isset($_GET['user'])) {
                 <!-- <div class="Type"> -->
         </h1>
         <div class="center_div text-center" action="profile.php" method="post">
-            <p>
-                <?php include 'profile_location.php'; ?>
-            </p>
-            <p>
+            <h2>
                 <?php include 'profile_review_avg.php'; ?>
-            </p>
+            </h2>
+            <h3 style="margin-bottom:5px;">
+                <?php include 'profile_location.php'; ?>
+            </h3>
+            <div class="col">
+                <div style="height:400px;overflow:auto;border:8px double green;padding:2%;">
+                    <h2>Reviews: </h2>
+                    <?php include 'profile_comments.php'; ?>
+                </div>
+            </div>
             <div class="row">
                 <?php if (!($_SESSION['username'] === $_GET['user'])) { ?>
                 <?php echo ("<form class='center_div' action='profile.php?user=$_GET[user]' method='post'>"); ?>
                 <div class="col">
-                    <textarea name="review" type="text" class="form-control" placeholder=""></textarea>
+                    <h3 style="color:black;"> Leave a review: </h3>
+                    <span style="color:black;">Review Text:<span>
+                            <textarea name="review" type="text" class="form-control" placeholder=""></textarea>
                 </div>
                 <div class="col">
+                    <span style="color:black;">Star Rating:</span>
                     <select name="rating">
                         <option value=""></option>
                         <option value="5">5</option>
@@ -104,18 +113,11 @@ if (isset($_GET['user'])) {
                         <option value="1">1</option>
                     </select>
                 </div>
-                <button class="btn btn-outline-success" type="submit" name="go">GO</button>
+                <br>
+                <button class="btn btn-outline-success" type="submit" name="go">Submit Review</button>
                 </form>
             </div>
             <?php } ?>
-
-            <div class="col">
-                <h2>Reviews: </h2>
-                <div style="height:400px;width:140px;overflow:auto;border:8px double green;padding:2%;width: 75%;">
-                    <?php include 'profile_comments.php'; ?>
-                </div>
-
-            </div>
         </div>
         <div><br></div>
 

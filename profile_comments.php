@@ -28,18 +28,19 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output comments in each row and calculate star rating
     while($row = $result->fetch_assoc()) {
-        echo "&nbsp;&nbsp;" . $row["ReviewPoster"] . ": " . $row["StarRating"] . " Stars";?>
-    <div style=margin-left:45px;>
-        <?php echo $row["TextReview"]; ?>
+        echo "&nbsp;&nbsp;" . $row["ReviewPoster"] . " Gave " .$row["StarRating"] . " Stars and said:";?>
+    <div style="font-style:italic;">
+        <?php echo '"'.$row["TextReview"].'"'; ?>
     </div>
     <?php
     }
-    echo "<br><br>";
-} else {
-    echo "No comments exist yet for this user";
-}
-$conn->close();
-?>
+    echo "
+        <br><br>";
+        } else {
+        echo "No comments exist yet for this user";
+        }
+        $conn->close();
+        ?>
 </body>
 
 </html>
