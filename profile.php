@@ -11,15 +11,42 @@
   	header("location: splashpage.php");
 	}
 	
-	if (isset($_GET['user'])) {
-		$dbconn = new PDO("mysql:host=localhost;dbname=rideshare", 'root', '');
-		$dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$res = $dbconn->query("SELECT count(*) FROM users WHERE username = '".$_GET['user']."';");
-		if ($res->fetchColumn() <= 0){
-			// maybe make an error page?
-			header("location: index.php");
-		}
-	}
+
+	try {
+      //create database
+	  
+	  $server = 'localhost';
+	  $user = 'root';
+      $pass = '';
+	  $dbname = 'rideshare';
+      $review=$_POST['review'];
+      $rating=$_POST['rating'];
+	  if($rating!=0){
+		  $dbconn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
+		  $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		  $ins=$dbconn->prepare(
+			'INSERT INTO `comments` (CommentID,ReviewedUser,ReviewPoster,StarRating,TextReview)
+			VALUES (:CommentID,:ReviewedUser,:ReviewPoster,:StarRating,:TextReview)'
+		  );
+		  $username=$_SESSION['username'];
+		  $reviewed=$_GET['user'];
+		  $ins->bindParam(':CommentID',$id);
+		  $ins->bindParam(':ReviewedUser',$reviewed);
+		  $ins->bindParam(':ReviewPoster',$username);
+		  $ins->bindParam(':StarRating',$rating);
+		  $ins->bindParam(':TextReview',$review);
+		  $ins->execute();
+	  }
+
+      
+      // var_dump($result);
+      // echo("$result");
+      
+    }
+    catch(PDOException $e){
+      
+      echo "<br>" . $e->getMessage();
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,9 +72,29 @@
 				<div class="col">
 				  <h2> <?php echo $_GET['user']; ?> </h2>
 				  <p> <?php include 'profile_location.php'; ?> </p>
-                  <p> Rating: </p>
                   <br>
-                  <a class='btn btn-outline-success' href='profile.php?user=".$_SESSION['username']."&new_comment=true'> Add User Review </a> <span>&ensp;</span>
+				 <?php echo ("<form class='center_div' action='profile.php?user=$_GET[user]' method='post'>"); ?>
+						<div class="row">
+							<div class="col">
+							  <textarea name="review" type="text" class="form-control" placeholder=""></textarea>
+							</div>
+							<div class="col">
+							  <select name="rating">
+								  <option value=""></option>	
+								  <option value="5">5</option>
+								  <option value="4">4</option>
+								  <option value="3">3</option>
+								  <option value="2">2</option>
+								  <option value="1">1</option>
+								</select>
+							</div>
+						</div>
+						<br>
+
+						<br>
+					
+						 <button class="btn btn-outline-success" type="submit"name="go">GO</button>
+				  </form>
 				</div>
             
                 <div class="col">
@@ -55,6 +102,7 @@
                     <div style="height:400px;width:140px;overflow:auto;border:8px double green;padding:2%;width: 75%;">
                         <?php include 'profile_comments.php'; ?>
                     </div>
+					
             </div>
 		</div>		
   </div>
