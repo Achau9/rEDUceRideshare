@@ -22,6 +22,8 @@ Project Features:
         in PHP. This function stores the salt inline with the hashed password
         so there is no need for a seperate salt column in the users table.
 
+    [PHP Reference](http://php.net/manual/en/faq.passwords.php#faq.passwords.salt)
+
     2. Posting as a Rider
         TODO: Fill in
 
