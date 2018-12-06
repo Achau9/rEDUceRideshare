@@ -25,10 +25,13 @@ Project Features:
     [PHP Reference](http://php.net/manual/en/faq.passwords.php#faq.passwords.salt)
 
     2. Posting as a Rider
-        TODO: Fill in
+        When the form is submitted on rideform.php, insert.php is called and inserts data into the riders table. The
+        data is retrieved using POST requests from the forms. The user is then redirected to the offerride result page.
+        
 
     3. Posting as a Driver
-        TODO: Fill in
+        When the form is submitted on offerform.php, insert.php is called and inserts data into the drivers table. The
+        data is retrieved using POST requests from the forms. The user is then redirected to the ride result page.
 
     4. Profiles
         Profile pages are generated via a GET request with a given username
